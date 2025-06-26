@@ -5,158 +5,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Slider con immagine centrale e laterali</title>
-    <style>
-        body {
-            margin: 0;
-            background: #222;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-        }
-
-        .slider-container {
-            position: relative;
-            width: 70%;
-            height: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .arrow {
-            position: absolute;
-            top: 43%;
-            font-size: 3rem;
-            color: white;
-            cursor: pointer;
-            text-shadow: 0;
-            transition: text-shadow 0.3s ease, color 0.3s ease;
-        }
-
-        .arrow:hover {
-            color: rgb(206, 206, 206);
-            text-shadow: 0 0 10px white;
-        }
-
-        .arrow.left {
-            left: 0;
-        }
-
-        .arrow.right {
-            right: 0;
-        }
-
-        .slider {
-            position: relative;
-            width: 70%;
-            height: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Immagine centrale */
-        .slide {
-            position: absolute;
-        }
-
-        .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 15px;
-        }
-
-        /* Dimensioni e posizioni */
-        .slide.center {
-            width: 60%;
-            height: 180%;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%) scale(1);
-            z-index: 3;
-        }
-
-        .slide.left {
-            width: 40%;
-            height: 120%;
-            /* mantiene proporzione 4:3 */
-            left: 15%;
-            top: 50%;
-            transform: translate(-50%, -50%) scale(0.85);
-            z-index: 2;
-            opacity: 0.6;
-            box-shadow: none;
-        }
-
-        .slide.right {
-            width: 40%;
-            height: 120%;
-            left: 87%;
-            top: 50%;
-            transform: translate(-50%, -50%) scale(0.85);
-            z-index: 2;
-            opacity: 0.6;
-            box-shadow: none;
-        }
-    </style>
+    <link rel="stylesheet" href="images-slider.css">
 </head>
 
 <body>
 
     <div class="slider-container">
         <div class="arrow left" onclick="prevSlide()">‹</div>
-        <div class="slider" id="slider"></div>
+        <div class="slider" id="slider">
+            <div class="slide left"><img /></div>
+            <div class="slide center"><img /></div>
+            <div class="slide right"><img /></div>
+        </div>
         <div class="arrow right" onclick="nextSlide()">›</div>
     </div>
 
-    <script>
-        const images = [
-            "1.png", "2.jpg", "3.jpg", "4.png", "5.png", "6.jpg",
-        ];
 
-        let currentIndex = 0;
-        const slider = document.getElementById('slider');
-
-        function renderSlider() {
-            slider.innerHTML = '';
-
-            const prevIndex = (currentIndex - 1 + images.length) % images.length;
-            const nextIndex = (currentIndex + 1) % images.length;
-
-            // Immagine sinistra
-            const leftSlide = document.createElement('div');
-            leftSlide.classList.add('slide', 'left');
-            leftSlide.innerHTML = `<img src="${images[prevIndex]}" alt="Precedente">`;
-            slider.appendChild(leftSlide);
-
-            // Immagine centrale
-            const centerSlide = document.createElement('div');
-            centerSlide.classList.add('slide', 'center');
-            centerSlide.innerHTML = `<img src="${images[currentIndex]}" alt="Corrente">`;
-            slider.appendChild(centerSlide);
-
-            // Immagine destra
-            const rightSlide = document.createElement('div');
-            rightSlide.classList.add('slide', 'right');
-            rightSlide.innerHTML = `<img src="${images[nextIndex]}" alt="Successiva">`;
-            slider.appendChild(rightSlide);
-        }
-
-        function prevSlide() {
-            currentIndex = (currentIndex - 1 + images.length) % images.length;
-            renderSlider();
-        }
-
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % images.length;
-            renderSlider();
-        }
-
-        renderSlider();
-    </script>
+    <script src="images-slider.js"></script>
 
 </body>
 
